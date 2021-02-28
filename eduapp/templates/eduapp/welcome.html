@@ -1,0 +1,15 @@
+{% extends 'eduapp/base.html' %} {% load static %} {% block content %}
+<div class="section-bg mt-5" id="introduction">
+	<div class="jumbotron">
+		<div class="alert alert-dismissible alert-success">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <h1>Welcome to Quizerr</h1> You have successfully registered!
+		</div>
+		<hr class="my-4">
+		<p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
+		<p class="lead">
+		<a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Register Here</a>
+		</p>
+	</div>
+</div>
+{% endblock %}
