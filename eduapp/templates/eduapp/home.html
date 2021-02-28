@@ -1,8 +1,13 @@
 {% extends 'eduapp/base.html' %} {% load static %} {% block content %}
-<div class="section-bg" id="introduction">
-  HELLO
-  <div>
-    {{name}}=> {{desc}}=> {{time}}
-  </div>
+<div class="section-bg mt-5" id="introduction">
+	<div class="jumbotron">
+		<h1 class="display-3">The Best Quiz Maker<br> for Education</h1>
+		<p class="lead">Our secure, professional web-based Quiz maker is an <br> easy-to-use, customizable online testing solution for business,<br> training & educational assessment with Tests & Quizzes graded<br> instantly saving you hours of paperwork!</p>
+		<hr class="my-4">
+		<p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
+		<p class="lead">
+		<a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Register Here</a>
+		</p>
+	</div>
 </div>
 {% endblock %}
