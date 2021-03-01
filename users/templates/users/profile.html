@@ -1,0 +1,22 @@
+{% extends 'eduapp/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="content-section" style="padding:5%">
+            <h1 class="display-3 text-center">{{user.username}}'s Profile</h1>
+            <p class="lead text-center">Quiz Administrators</p>
+            <hr class="my-4" />
+            <p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
+            <div class="media">
+            <img class="rounded-circle account-img" src = {{ user.profile.image.url }}>
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+            </div>
+            <p>Interstellar theme </p>
+        </div>
+    </div>
+{% endblock content %}
