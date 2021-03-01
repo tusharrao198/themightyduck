@@ -21,10 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+
+try:
+    SECRET_KEY = config("SECRET_KEY")
+except:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# try and except for deployment purpose
+
+SECRET_KEY = "kgy4)xn&)a-@#o8yi%#y!x-+!by33y*z!ia^b%xiff2ai1^jjj"
+# Secretly for running directly to showcase project
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+
+# DEBUG = config("DEBUG")
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -34,6 +45,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "eduapp.apps.EduappConfig",
+    "covidtracker.apps.CovidtrackerConfig",
     "crispy_forms",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,6 +53,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -57,12 +71,14 @@ ROOT_URLCONF = "edumarker.urls"
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, "eduapp", "templates", "eduapp/")
 
+TEMPLATE_DIR_COVID = os.path.join(
+    BASE_DIR, "covidtracker", "templates", "covidtracker/"
+)
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            TEMPLATE_DIR,
-        ],
+        "DIRS": [TEMPLATE_DIR, TEMPLATE_DIR_COVID],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -1,0 +1,52 @@
+{% extends 'covidtracker/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 align ="center"style="color: green" ><b> Cases in State - Table</b></h1>
+
+<div class="section-bg" style="padding:8%;" id="introduction">
+  <!-- Default switch -->
+  <div class='text-right' style='font-family: "JetBrains Mono", monospace;'> 
+  Switch to Dark Mode
+  <label class="switch">
+  <input type="checkbox">
+  <span class="slider round darkMode"></span>
+  </label>
+  </div>
+  <div class="container">
+    <div class="section-bg">
+    <table  class="table table-striped table-bordered">
+      <thead class= "thead-dark subtitle-a">
+        <tr>
+          <th>State</th>
+          <th>Districts</th>
+          <th>Confirmed </th>
+          <th>Deaths</th>
+          <th>Recovered</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in query_results %}
+          <tr>
+              <td>{{i.state_name}}</td>
+              <td>{{i.city_name}}</td>
+              <td>{{i.confirmed}}</td>
+              <td>{{i.Death}}</td>
+              <td>{{i.Recovered}}</td>
+              <td>{{i.Active}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="align-items-right">
+      <button type="submit" class="btn btn-outline-warning"><a href={% url 'covid-home' %}>Go to Home</a></button>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

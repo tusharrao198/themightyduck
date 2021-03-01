@@ -1,0 +1,275 @@
+{% extends 'covidtracker/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-bg" id="introduction">
+      <!-- Default switch -->
+    <div class='text-right' style='font-family: "JetBrains Mono", monospace;'> 
+        Switch to Dark Mode
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round darkMode"></span>
+      </label>
+    </div>
+    <div class="container mt-2" id="text_reduce">
+      <div class="text-right"><h1 style="color: #1de9b6;" class="title-head text-center headingtext text_size_reduce">COVID | CASES | INDIA </h1><p style='font-family: "JetBrains Mono", monospace;'>Last Updated: {{present_date}}</p><hr class="titlehr" />
+      </div>
+      <!-- <button><a href="/#/" class="darkMode">HELLO DARK MODE></a></button> -->
+    </div>
+
+  <!-- cards  -->
+  <div class="card-group mt-2 justify-content-center subtitle-a text-center" style='font-weight: 900;'>
+    <div class="card card1 bg-danger border-danger mb-2" style="max-width: 15rem;">
+      <div class="card-header border-danger">Confirmed</div>
+      <div class="card-body">
+        <!-- <h5 class="card-title headingtext">Confirmed</h5> -->
+        <p class="card-text">{{confirmed}}</p><p>+↑({{cases_increment}})</p>
+      </div>
+      <!-- <div class="card-footer bg-transparent border-success">Footer</div> -->
+    </div>
+    <div class="card card1 bg-primary border-primary mb-2" style="max-width: 15rem;">
+      <div class="card-header border-primary">Deaths</div>
+        <div class="card-body">
+        <!-- <h5 class="card-title">Deaths</h5> -->
+        <p class="card-text">{{Death}}</p><p>+↑({{death_inc}})</p>
+      </div>
+      <!-- <div class="card-footer bg-transparent border-success">Footer</div> -->
+    </div>
+    <div class="card card2 bg-success border-success mb-2" style="max-width: 15rem;">
+      <div class="card-header border-success">Recovered</div>
+      <div class="card-body text-center">
+        <!-- <h5 class="card-title">Recovered</h5> -->
+        <p class="card-text">{{Recovered}}</p><p>+↑({{recovered_inc}})</p>
+      </div>
+      <!-- <div class="card-footer bg-transparent border-success">Footer</div> -->
+    </div>
+    <div class="card card4 bg-warning border-warning mb-2 " style="max-width: 15rem;">
+      <div class="card-header border-warning">Active</div>
+      <div class="card-body text-center">
+        <p class="card-text">{{Active}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  
+  <h1 align="center" class="text-center" style="color: Orange"><b> Search Cases in your city</b></h1>
+  <div class="container justify-content-center">
+  <div class="msg"></div>
+  <form class="form-horizontal" id="find_cases" action="/" method = "GET">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="state" style="color: white">State:</label>
+          <div class="col-auto">
+            <input  list = "states" class="form-control" type="Text" name="state" id="state" placeholder="Enter State">
+              <datalist  id="states">
+                {% for state in states_cases %}
+                  <option value="{{state}}">{{state}}</option>
+                {% endfor %}
+              </datalist>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="city" style="color: white">City:</label>
+          <div class="col-auto">
+              <input  list = "cities" class="form-control" type ="Text" name="city" id="city" placeholder="Enter city , (First few letters of your city)">
+              <datalist  id="cities">
+                <option></option>
+              </datalist>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10 center">
+            <button type="submit" id="submit_button" class="btn btn-outline-info">Search</button>
+          </div>
+        </div>
+  </form>
+  </div>
+
+  <br>
+  <h1 align ="center"style="color: green" ><b id="cases_each_state">Cases in States</b></h1>
+  
+    <div class="container" id="main_table">
+      <div class="section-bg">
+      <table  class="table table-bordered table-striped">
+      <thead class= "thead-dark">
+      <tr>
+        <th>Sr No.</th>
+        <th>State</th>
+        <th>Confirmed </th>
+        <th>Deaths</th>
+        <th>Recovered</th>
+        <th>Active</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for state in states_cases %}
+        <tr>
+          <td>{{state.pk}}</td>
+          <td><a href="{% url 'city' state.state_name %}"><i class="fa fa-link">{{state.state_name}}</i></a></td>
+          <td>{{state.confirmed}}</td>
+          <td>{{state.Death}}</td>
+          <td>{{state.Recovered}}</td>
+          <td>{{state.Active}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      <!-- </div> -->
+    </table>
+    </div>
+  </div>
+
+  <div class="container" id="city_table" hidden>
+    <div class="section-bg">
+    <table  class="table table-bordered table-striped">
+    <thead class= "thead-dark">
+    <tr>
+      <th>City</th>
+      <th>State</th>
+      <th>Confirmed </th>
+      <th>Deaths</th>
+      <th>Recovered</th>
+      <th>Active</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="city_city_name"></td>
+        <td id="city_state_name"></td>
+        <td id="city_confirmed"></td>
+        <td id="city_Death"></td>
+        <td id="city_Recovered"></td>
+        <td id="city_Active"></td>
+      </tr>
+    
+    </tbody>
+    <!-- </div> -->
+  </table>
+  <div class="align-items-right">
+    <button type="submit" class="btn btn-outline-warning"><a href={% url 'covid-home' %}>Show Cases Count in States</a></button>
+  </div>
+  </div>
+</div>
+
+  <br>
+
+  <div class="title-box text-center">
+      <h3 class="title-a">
+          ABOUT
+      </h3>
+      <hr class="titlehr" />
+      <p class="font-italic "><br>{{about_intro|safe}}</p>
+      <div class="text-dark text-center px-3">
+          <h3 class="subtitle-a">*Contact*</h3>
+          <p class="font-bold">themightyduck (HACK 30): <a href="https://github.com/tusharrao198/themightyduck"><i  class="fa fa-github" aria-hidden="true">GTIHUB</i></a></p>
+          <p class="fa fa-map-github"></p>
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+    
+    const my_form = document.querySelector("#city");
+    my_form.addEventListener('mouseover', abcd);  
+    
+    
+    var state_check_if_same = "";
+    var previous_data = "";
+    function abcd(e){
+      e.preventDefault();
+          const state = document.querySelector("#state");
+          let state_name = state.value;
+          
+          if (state_name.length!=0 && state_check_if_same!=state_name)
+          {
+            state_check_if_same = state_name;
+                    let dts = {
+                        type: "get",
+                        dataType: "json",
+                        url: `http://127.0.0.1:8000/covidtracker/api/districts/${state_name}`,
+                        data: [],
+                        contentType: "application/json; charset=utf-8",
+                        success: function (citi) {
+                          doThis(citi, state_name);
+                        },
+                        error: function (y) {
+                          console.log("problem", JSON.stringify(y));
+                        },
+                      };
+                      $.ajax(dts);
+          }
+    }
+    
+    function doThis(citi, state_name){
+      if (citi.length==0){
+        console.log(`Data was not recieved for State = ${state_name}`);
+        }else{
+          let cities = document.querySelector("#cities");
+          if (previous_data.length!=0) {
+            for(let i = 0; i < previous_data.length; i++) {
+              cities.removeChild(cities.lastElementChild);
+            }
+          }
+          for(let i = 0; i < citi.length; i++) {
+            let opt = citi[i].city_name;
+            let el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            cities.appendChild(el);
+          }
+          previous_data = citi;
+        }
+    }
+  
+    document.getElementById("submit_button").addEventListener('click', check_search);
+    function check_search(e) {
+      e.preventDefault();
+      let state_input = document.querySelector("#state").value;
+      let city_input = document.querySelector("#city").value;
+      let s = state_input.value;
+      let c = city_input.value;
+
+      if(state_input.length==0 || city_input.length==0){
+        const msg = document.querySelector(".msg");
+        msg.classList.add("text-danger");
+        msg.innerHTML = "Please Select!";
+        setTimeout(() => (msg.innerHTML=''), 1000);
+      }else{
+        // document.getElementById("find_cases").submit();
+        const state = document.querySelector("#state");
+        const city = document.querySelector("#city");
+        let state_name = state.value;
+        let city_name = city.value;
+        let dtss = {
+                type: "get",
+                dataType: "json",
+                url: `http://127.0.0.1:8000/covidtracker/api/districts/${state_name}/${city_name}`,
+                data: [],
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                  document.getElementById("main_table").hidden=true;
+                  const data_array = Object.keys(response[0]);
+
+                  for(let q = 1; q<(data_array.length-1); q++){
+                    update_city_table(data_array[q], response[0]); 
+                  }
+                  document.getElementById("cases_each_state").innerHTML=`Cases in ${response[0].city_name},${response[0].state_name}`;
+                  document.getElementById("city_table").hidden=false;
+                },
+                error: function (y) {
+                  console.log("problem", JSON.stringify(y));
+                },
+              };
+              $.ajax(dtss);
+      }
+      
+      function update_city_table(value, response){
+        document.getElementById(`city_${value}`).innerHTML=eval(`response.${value}`);
+      }
+    }
+  </script>
+{% endblock %}
+
+

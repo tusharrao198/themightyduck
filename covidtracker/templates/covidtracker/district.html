@@ -1,0 +1,50 @@
+{% extends 'covidtracker/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-bg" style="padding:8%;" id="introduction">
+  <!-- Default switch -->
+  <div class='text-right' style='font-family: "JetBrains Mono", monospace;'> 
+  Switch to Dark Mode
+  <label class="switch">
+  <input type="checkbox">
+  <span class="slider round darkMode"></span>
+  </label>
+  </div>  
+  <div class="container mt-2">
+      <h1 class="title-head text-center headingtext">COVID Cases</h1>
+      <hr class="titlehr" />
+  </div>
+  <h2 align ="center" style="color:red"> <b>COVID Cases Districtwise</b></h2>
+    <div class="container">
+      <div class="section-bg">
+    <table  class="table table-bordered table-striped">
+    <thead class= "thead-dark">
+    <tr>
+      <th>Sr.No</th>
+      <th>State</th>
+      <th>Districts</th>
+      <th>Confirmed </th>
+      <th>Deaths</th>
+      <th>Recovered</th>
+      <th>Active</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for district in district_cases %}
+      <tr>
+        <td>{{district.id}}</td>
+        <td>{{district.state_name}}</td>
+        <td>{{district.city_name}}</td>
+        <td>{{district.confirmed}}</td>
+        <td>{{district.Death}}</td>
+        <td>{{district.Recovered}}</td>
+        <td>{{district.Active}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
