@@ -3,6 +3,13 @@
 Hack30 Mini Hackathon project
 
 `Quiz Platform`
+Quizzing platform with chat room to directly talk to instructor in case of any queries.
+Web sockets chat is functional but not connected to quiz app.
+
+In order to see it working,
+run server with below steps and goto :-
+`http://127.0.0.1:8000/chatroom/chat/<any random number>`
+an can see working by opening in two different browsers.
 
 `Covid Cases Count`
 Tracks Covid Cases Daily with search functionality for a particular city
