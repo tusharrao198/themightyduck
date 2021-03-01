@@ -24,8 +24,18 @@
         <a class="nav-link" href="#contactUs">Contact Us</a>
       </li>
     </ul>
-    <div class="form-inline my-2 my-lg-0">
+    <!-- <div class="form-inline my-2 my-lg-0">
       <a class="btn btn-secondary my-2 my-sm-0" href="{% url 'login' %}">Login</a>
+    </div> -->
+    <!-- Navbar Right Side -->
+    <div class="navbar-nav">
+      {% if user.is_authenticated %}
+        <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.username}}'sProfile</a> 
+        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a> 
+      {% else %}
+        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+        <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+      {% endif %}
     </div>
   </div>
 </nav>

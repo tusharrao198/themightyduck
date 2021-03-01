@@ -1,0 +1,28 @@
+{% extends 'eduapp/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class ="content-section" style="padding:5%">
+            <h1 class="display-3 text-center">Register</h1>
+            <p class="lead text-center">Quiz Administrators</p>
+            <hr class="my-4" />
+            <p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
+            <form method = "POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Join Today</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="fomr-group">
+                    <button class ="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class ="border-top pt-3">
+                <small class="text-muted">
+                    Already Have an Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
