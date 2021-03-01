@@ -43,6 +43,9 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
+    "chatroom.apps.ChatroomConfig",
+    "corsheaders",
     "users.apps.UsersConfig",
     "eduapp.apps.EduappConfig",
     "covidtracker.apps.CovidtrackerConfig",
@@ -58,6 +61,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,6 +72,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "edumarker.urls"
+
+ASGI_APPLICATION = "edumarker.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
+
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, "eduapp", "templates", "eduapp/")
 
