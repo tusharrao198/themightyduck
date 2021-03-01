@@ -1,11 +1,11 @@
-# themighyduck
+# themightyduck
 
 Hack30 Mini Hackathon project
 
 `Quiz Platform`
 
 `Covid Cases Count`
-Tracks Covid Cases Daily with search fucntionality for a particular city
+Tracks Covid Cases Daily with search functionality for a particular city
 
 # How To Run Project:-
 

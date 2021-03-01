@@ -12,21 +12,8 @@ def home(request):
     return render(request, "eduapp/home.html", context)
 
 
-# def welcome(request):
-#     context = {
-#         "title": "Welcome",
-#     }
-#     return render(request, "eduapp/welcome.html", context)
-
-
 def welcome(request):
-    # User
-    # r = []
-    # q = Quiz.objects.all()
-
-    print("q", q)
     context = {
-        "quiz": q,
         "title": "Welcome",
     }
     return render(request, "eduapp/welcome.html", context)
