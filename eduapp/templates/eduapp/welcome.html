@@ -1,15 +1,34 @@
 {% extends 'eduapp/base.html' %} {% load static %} {% block content %}
 <div class="section-bg mt-5" id="introduction">
-	<div class="jumbotron">
-		<div class="alert alert-dismissible alert-success">
-		  <button type="button" class="close" data-dismiss="alert">&times;</button>
-		  <h1>Welcome to Quizerr</h1> You have successfully registered!
-		</div>
-		<hr class="my-4">
-		<p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
-		<p class="lead">
-		<a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Register Here</a>
-		</p>
-	</div>
+  <div class="jumbotron">
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h1>Welcome to Quizerr</h1>
+      You have successfully registered!
+    </div>
+    <hr class="my-4" />
+    <p class="btn-lg"><strong>The Quiz Maker for Professionals</strong></p>
+
+    <a class="btn btn-primary btn-lg" href="#" role="button">Create Quiz</a>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="serial">S.No.</th>
+          <th scope="Data_type">Quizzes</th>
+          <th scope="Data_type">Questions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in range(len) %}
+        <tr class="table-active">
+          <th scope="row">1</th>
+          <td>{{quiz[i].name}}</td>
+          <td>{{questions[i]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
